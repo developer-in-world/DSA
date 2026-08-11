@@ -25,6 +25,7 @@ class Solution:
                     slow = slow.next
                     fast = fast.next
                 return slow
+        return None
 
 nums = list(map(int, input().split()))
 head = createLinkedList(nums)
