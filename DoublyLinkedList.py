@@ -23,6 +23,7 @@ class DoublyLinkedList:
             temp.next = newNode
             temp = temp.next
             
+        return self.head # forgot this line , sorry
 
     def printing_doubly_linked_list(self):
         if self.head is None:
