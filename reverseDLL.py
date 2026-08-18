@@ -22,6 +22,9 @@ class Solution:
         return head
     
     def optimalSolution(self, head):
+        if head.next is None:
+            return head
+        
         prev = None
         current = head
         
