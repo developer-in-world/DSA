@@ -40,6 +40,40 @@ class Solution:
                 board[row] = board[row][:col] + "Q" + board[row][col+1:]
                 self.__solve(col+1, board, n, ans)
                 board[row] = board[row][:col] + "." + board[row][col+1:]
+    
+    def __solveOptimal(self, n, ans, board, col, horizonatal, upperD, lowerD):
+        if col == n:
+            ans.append(list(board))
+            return
+        
+        for row in range(n):
+            if horizonatal[row] == 0 and upperD[(n-1)+(col-row)] == 0 and lowerD[col + row] == 0:
+                
+                board[row] = board[row][:col] + "Q" + board[row][col+1:]
+                horizonatal[row] = 1
+                lowerD[col + row] = 1
+                upperD[(n-1)+(col - row)] = 1
+                
+                self.__solveOptimal(n, ans, board, col+1, horizonatal, upperD, lowerD)
+                
+                board[row] = board[row][:col] + "." + board[row][col+1:]
+                horizonatal[row] = 0
+                lowerD[col+row] = 0
+                upperD[(n-1) + (col-row)] = 0
+                
+                
+        
+        
+        
+    def solveNqueen(self, n):
+        ans = []
+        board = ["."* n for _ in range(n)]
+        horizontal = [0] * n
+        upperDiagonal = [0] * (2*n-1)
+        lowerDiagonal = [0] * (2*n-1)
+        self.__solveOptimal(n, ans, board, 0, horizontal, upperDiagonal, lowerDiagonal)
+        return ans
+        
             
   
         
@@ -54,5 +88,5 @@ class Solution:
         
 solver = Solution()
 n = int(input("Enter the n value: "))
-result = solver.bruteForceNQueens(n)
+result = solver.solveNqueen(n)
 print(result)        
