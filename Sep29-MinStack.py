@@ -77,6 +77,5 @@ class MinStack:
         if len(self.stack) == 0:
             return None
         else:
-            return self.stack[-1][1]
-
+            return self.stack[-1][1]      
 """
