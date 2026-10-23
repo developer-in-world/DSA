@@ -22,10 +22,29 @@ class Solution:
             
         return nums
     
+    def optimal(self, nums:list[int]) -> list[int]:
+        n = len(nums)
+        if n == 0:
+            return []
+        stack = []
+        
+        for i in range(n):
+            if nums[i] > 0:
+                stack.append(nums[i])
+            else:
+                while stack and stack[-1] > 0 and stack[-1] < abs(nums[i]):
+                    stack.pop()
+                if stack and stack[-1] == abs(nums[i]):
+                    stack.pop()
+                elif len(stack) == 0 or stack[-1] < 0:
+                    stack.append(nums[i])
+        
+        return stack
+    
 
 solver = Solution()
 nums = list(map(int, input("Enter the values of arr: ").split()))
-result = solver.bruteForce(nums)
+result = solver.optimal(nums)
 print(result)
 
                          
